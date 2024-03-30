@@ -17,4 +17,15 @@ else:
     print("Please type an existing directory")
 
 #create folders depending on file types existing in the dir
+def create_folder():
+    folder_path = directory / extension
+    for extension in entries:
+        if not folder_path.exists():
+            #folder_path.mkdir()
+            print(f"Folder '{extension}' created successfully in '{directory}'")
+        else:
+            print(f"Folder '{extension}' already exists in '{directory}'")
+        
 #put the files on the respective folders
+
+create_folder()
