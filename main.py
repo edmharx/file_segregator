@@ -5,27 +5,31 @@ import os
 #set the dir of the files
 directory = (r"C:\Users\edmha\OneDrive\Desktop\Importants")
 
-#checking if the directory exists
-if os.path.exists(directory):
-    #open directory
-    with os.scandir(directory) as entries:
-        for entry in entries:
-            if entry.is_file(): #read file type
-                filename, extension = os.path.splitext(entry.name)
-                print(f"File: {entry.name}, Extension: {extension}")
-else:
-    print("Please type an existing directory")
-
 #create folders depending on file types existing in the dir
-def create_folder():
-    folder_path = directory / extension
-    for extension in entries:
-        if not folder_path.exists():
-            #folder_path.mkdir()
-            print(f"Folder '{extension}' created successfully in '{directory}'")
-        else:
-            print(f"Folder '{extension}' already exists in '{directory}'")
-        
-#put the files on the respective folders
+def create_folder(directory):
+    with os.scandir(directory) as entries: #get the files
+        for entry in entries:
+            if entry.is_file(): #separate filename and extension
+                filename, extension = os.path.splitext(entry.name)
+                extension = extension[1:]
 
-create_folder()
+        new_folder_name = os.path.join(directory, extension)
+        if not new_folder_name.exists(): #create a folder per extension if it does not exist
+            new_folder_name.mkdir()
+
+        #put the files on the respective folders
+        move_to_folder = os.path.join (new_folder_name, filename)
+        move_to_folder()
+
+if os.path.exists(directory):
+    create_folder(directory)
+    print("Folders are created succcessfully")
+else:
+    print ("Please use a valid directory")
+
+
+#get the directory
+#get the files
+#separate filename and extension
+#create a folder per extension if it does not exist
+#move the file to the respective folder
