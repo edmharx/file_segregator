@@ -3,7 +3,7 @@ import os
 
 
 #set the dir of the files
-directory = (r"C:\Users\edmha\Downloads\test folder")
+directory = (r"C:\Users\edmha\Downloads")
 
 #create folders depending on file types existing in the dir
 def create_folder(directory):
